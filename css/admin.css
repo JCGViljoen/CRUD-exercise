@@ -1,0 +1,11 @@
+.form{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+body{
+    background: url(https://i.postimg.cc/G2z07PNV/media.png);
+    color: white;
+}
+
