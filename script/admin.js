@@ -1,32 +1,48 @@
-//  const postBtn = document.querySelector('#postbtn')
-//  const message = document.querySelector('#message')
-//  const author = document.querySelector('#author')
-//  const result = document.querySelector('#')
+// Modal functionality
+const modal = document.getElementById('postModal');
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModal = document.getElementsByClassName('close')[0];
 
- // Function to post the blog message
-function postBlogMessage() {
-    let title = document.getElementById('title').value;
-    let content = document.getElementById('content').value;
-    let author = document.getElementById('author').value;
-    let image = document.getElementById('image').value;
-    let currentDate = new Date();
+openModalBtn.addEventListener('click', function() {
+  modal.style.display = 'block';
+});
+
+closeModal.addEventListener('click', function() {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Function to post the blog message
+function postBlogMessage(event) {
+  event.preventDefault();
   
-    let postData = {
-      title: title,
-      content: content,
-      author: author,
-      image: image,
-      date: currentDate.toISOString() // Convert date to ISO string format
-    };
+  let title = document.getElementById('title').value;
+  let content = document.getElementById('content').value;
+  let author = document.getElementById('author').value;
+  let image = document.getElementById('image').value;
+  let currentDate = new Date();
+
+  let postData = {
+    title: title,
+    content: content,
+    author: author,
+    image: image,
+    date: currentDate.toISOString() // Convert date to ISO string format
+  };
+
   
-    // Make an HTTP POST request to the server
-    fetch('https://example.com/api/blog', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(postData)
-    })
+  fetch('./', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(postData)
+  })
     .then(function(response) {
       if (response.ok) {
         // Successful post
@@ -42,12 +58,8 @@ function postBlogMessage() {
       // Error in making the request
       console.log('Error:', error);
     });
-  }
-  
-  // Event listener for form submission
-  let postForm = document.getElementById('postForm');
-  postForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    postBlogMessage();
-  });
-  
+}
+
+// Event listener for form submission
+let postForm = document.getElementById('postForm');
+postForm.addEventListener('submit', postBlogMessage);
